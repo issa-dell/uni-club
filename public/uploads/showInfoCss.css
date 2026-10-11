@@ -1,0 +1,127 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #6b1414;
+    background-image: radial-gradient(circle at top, #821c1c 0%, #4a0d0d 100%);
+    font-family: 'Cairo', sans-serif;
+    color: #fce8e8;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.profile-container {
+    width: 100%;
+    max-width: 600px;
+    background: linear-gradient(135deg, rgba(82, 12, 12, 0.85) 0%, rgba(46, 5, 5, 0.95) 100%);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 180, 180, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 30px;
+    font-size: 28px;
+    text-shadow: 0 2px 10px rgba(255, 180, 180, 0.2);
+}
+
+h1 span {
+    color: #ffb8b8;
+    background: none;
+    padding: 0;
+    border-radius: 0;
+}
+
+/* بطاقة المعلومات */
+.info-card {
+    background: rgba(40, 5, 5, 0.5);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 180, 180, 0.1);
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255, 180, 180, 0.08);
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #f7dede;
+    font-size: 16px;
+}
+
+.info-value {
+    background: rgba(107, 31, 31, 0.6);
+    padding: 6px 14px;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 15px;
+    border: 1px solid rgba(255, 180, 180, 0.15);
+}
+
+/* زر الرجوع */
+.back-link-wrapper {
+    text-align: center;
+}
+
+.back-btn {
+    display: inline-block;
+    color: #f7dede;
+    text-decoration: none;
+    background-color: #a82020;
+    padding: 12px 30px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 180, 180, 0.2);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(168, 32, 32, 0.3);
+}
+
+.back-btn:hover {
+    background-color: #c72828;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(199, 40, 40, 0.4);
+}
+
+/* التجاوب مع الشاشات الصغيرة */
+@media only screen and (max-width: 480px) {
+    .profile-container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    .info-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .info-value {
+        width: 100%;
+        text-align: left;
+    }
+}

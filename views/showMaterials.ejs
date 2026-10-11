@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>show all materials</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/uploads/showMaterialsCss.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="nav-links">
+            <a href="/materials">← back</a>
+        </div>
+
+        <h1>List of Available Materials</h1>
+        
+        <form action="/materials/list" method="get" class="searchForm">
+            <div class="serachYear">
+                <label for="academyYears">Search</label>
+                <select name="academyYears" id="academyYears" required>
+                    <option value="" disabled selected>Select Year</option>
+                    <option value="1">Year 1</option>
+                    <option value="2">Year 2</option>
+                    <option value="3">Year 3</option>
+                    <option value="4">Year 4</option>
+                    <option value="5">Year 5</option>
+                </select>
+                <button type="submit" class="goBtn">Go</button>
+            </div>
+            <a href="/materials/list" class="showAllBtn">Show All</a>
+        </form>
+
+        <% if (materials && materials.length > 0) { %>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Academy Years</th>
+                            <th>Lang</th>
+                            <th>Course Code</th>
+                            <th>Added By</th>
+                            <th>File</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% materials.forEach((material, index) => { %>
+                            <tr>
+                                <td><%= index + 1 %></td>
+                                <td><strong><%= material.title %></strong></td>
+                                <td><%= material.academy_years %></td>
+                                <td><%= material.language %></td>
+                                <td><%= material.course_id %></td>
+                                <td><%= material.userName %></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <a href="<%= material.file_path %>" class="btn-download" target="_blank">Show</a>
+                                        
+                                        <% if( material.userName ==  userSession || userRole =='admin'  ){%>
+                                            <form action="/materials/delete/<%= material.id %>" method="POST" style="display:inline;">
+                                                <button type="submit" class="btn-delete">Delete</button>
+                                            </form>
+                                        <% }else{ %>
+                                            <form action="/materials/delete/<%= material.id %>" method="POST" style="display:none;">
+                                                <button type="submit" class="btn-delete">Delete</button>
+                                            </form>
+                                        <% } %>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        <% } else { %>
+            <div class="no-data">
+                <p>No more material right now</p>
+            </div>
+        <% } %>
+    </div>
+
+</body>
+</html>

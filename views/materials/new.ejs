@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Material - Uni-Club</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/uploads/newMaterialCss.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Add New Material</h1>
+        
+        <form action="/materials" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required placeholder="Enter material title">
+            </div>
+
+            <div class="form-group">
+                <label for="academy_years">Academic Year:</label>
+                <select name="academy_years" id="academy_years" required>
+                    <option value="" disabled selected>Select Year</option>
+                    <option value="1">Year 1</option>
+                    <option value="2">Year 2</option>
+                    <option value="3">Year 3</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="language">Language:</label>
+                <select name="language" id="language" required>
+                    <option value="" disabled selected>Select lang</option>
+                    <option value="Eng">Eng</option>
+                    <option value="Fr">Fr</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="materialCourse">Material Course:</label>
+                <select name="materialCourse" id="materialCourse" required>
+                    <option value="" disabled selected>Select course:</option>
+                    <option value="M1101">M1101</option>
+                    <option value="M1100">M1100</option>
+                    <option value="P1101">P1101</option>
+                    <option value="P1100">P1100</option>
+                    <option value="S1100">S1100</option>
+                    <option value="I1100">I1100</option>
+                    <option value="M1102">M1102</option>
+                    <option value="M1103">M1103</option>
+                    <option value="M1104">M1104</option>
+                    <option value="M1105">M1105</option>
+                    <option value="M1106">M1106</option>
+                    <option value="I1101">I1101</option>
+                    <option value="I2201">I2201</option>
+                    <option value="I2202">I2202</option>
+                    <option value="I2203">I2203</option>
+                    <option value="I2204">I2204</option>
+                    <option value="I2205">I2205</option>
+                    <option value="S2250">S2250</option>
+                    <option value="M2250">M2250</option>
+                    <option value="M2251">M2251</option>
+                    <option value="I2231">I2231</option>
+                    <option value="I2232">I2232</option>
+                    <option value="I2206">I2206</option>
+                    <option value="I2207">I2207</option>
+                    <option value="I2208">I2208</option>
+                    <option value="I2209">I2209</option>
+                    <option value="I2210">I2210</option>
+                    <option value="I2211">I2211</option>
+                    <option value="I2233">I2233</option>
+                    <option value="I2234">I2234</option>
+                    <option value="DHR300">DHR300</option>
+                    <option value="I3301">I3301</option>
+                    <option value="I3302">I3302</option>
+                    <option value="I3303">I3303</option>
+                    <option value="I3304">I3304</option>
+                    <option value="I3305">I3305</option>
+                    <option value="I3306">I3306</option>
+                    <option value="I3350">I3350</option>
+                    <option value="I3351">I3351</option>
+                    <option value="I3307">I3307</option>
+                    <option value="I3308">I3308</option>
+                    <option value="L3300">L3300</option>
+                    <option value="I3330">I3330</option>
+                    <option value="I3331">I3331</option>
+                    <option value="I3332">I3332</option>
+                    <option value="I3333">I3333</option>
+                    <option value="I3340">I3340</option>
+                    <option value="I3341">I3341</option>
+                    <option value="I3342">I3342</option>
+                    <option value="I3343">I3343</option>
+                    <option value="I3344">I3344</option>
+                </select>
+            </div>
+
+            <div class="form-group file-group">
+                <span id="file-name" class="label">Choose PDF File:</span>
+                <label for="file-input" class="custom-file-btn">Click Here</label>
+                <input type="file" id="file-input" name="materialFile" required style="display: none;" onchange="updateFileName(this)">
+            </div>
+
+            <div class="submitBtn">
+                <button type="submit" class="btn">Save Material</button>
+                <a href="/materials" class="back-link">Go Back</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- سكربت بسيط لتحديث اسم الملف عند اختياره -->
+    <script>
+        function updateFileName(input) {
+            const fileNameSpan = document.getElementById('file-name');
+            if (input.files && input.files[0]) {
+                fileNameSpan.textContent = "Selected: " + input.files[0].name;
+                fileNameSpan.style.color = "#ffb8b8";
+            }
+        }
+    </script>
+</body>
+</html>

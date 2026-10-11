@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materials - Uni-Club</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/uploads/materialsCss.css">
+</head>
+<body>
+    <div class="materials-container">
+        <h1>Materials Dashboard</h1>
+        
+        <% if (successMessage) { %>
+            <div class="added">
+                <%= successMessage %>
+            </div>
+        <% } %>
+
+        <div class="btn">
+            <a href="/materials/new">Add New Material</a>
+            <a href="/materials/list">Show All Materials</a>
+            <a href="/uni-club" class="back-btn">Go Back</a>
+        </div>
+    </div>
+</body>
+</html>

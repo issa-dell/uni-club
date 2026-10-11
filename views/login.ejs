@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/uploads/loginCss.css">
+</head>
+<body>
+    <div class="auth-container">
+        <h1>Login</h1>
+        <form action="/auth/login" method="POST">
+            <div class="form-group">
+                <label for="userName">User Name:</label>
+                <input type="text" id="userName" name="userName" required placeholder="Enter your username" autocomplete="off">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password" autocomplete="off">
+            </div>
+            
+            <button type="submit">Enter</button>
+        </form>
+
+        <div class="auth-link">
+            <p>Don't have an account? <a href="/auth/register">Create one</a></p>
+        </div>
+
+        <% if (locals.errorUserNotFound) { %>
+            <div class="errorMasseg">
+                <%= errorUserNotFound %>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+}
+
+/* تنسيق الحفظ التلقائي للمتصفح (Autofill) لتتطابق مع التصميم */
+input:-internal-autofill-selected,
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #fff !important; 
+    -webkit-box-shadow: 0 0 0px 1000px #3c0a0a inset !important; 
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+body {
+    background-color: #6b1414;
+    background-image: radial-gradient(circle at top, #821c1c 0%, #4a0d0d 100%);
+    color: #fce8e8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* حاوية نموذج التسجيل */
+.auth-container {
+    background: linear-gradient(135deg, rgba(82, 12, 12, 0.9) 0%, rgba(46, 5, 5, 0.95) 100%);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid rgba(255, 180, 180, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #ffffff;
+    font-size: 26px;
+    text-transform: capitalize;
+    text-shadow: 0 2px 10px rgba(255, 180, 180, 0.2);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #f7dede;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+input {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: rgba(60, 10, 10, 0.8);
+    border: 2px solid rgba(255, 180, 180, 0.2);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    border-color: #ffb8b8;
+    box-shadow: 0 0 10px rgba(255, 180, 180, 0.2);
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #a82020; 
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 4px 12px rgba(168, 32, 32, 0.3);
+}
+
+button:hover {
+    background-color: #c72828; 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(199, 40, 40, 0.4);
+}
+
+.errorMasseg {
+    background-color: rgba(168, 32, 32, 0.85);
+    border: 1px solid rgba(255, 180, 180, 0.3);
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: white;
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.haveAcc {
+    color: #f7dede;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.loginPage {
+    color: #ffb8b8;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.loginPage:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* التجاوب مع الشاشات الصغيرة */
+@media only screen and (max-width: 480px) {
+    .auth-container {
+        padding: 25px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+}

@@ -1,0 +1,175 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background-color: #6b1414;
+    background-image: radial-gradient(circle at top, #821c1c 0%, #4a0d0d 100%);
+    color: #fce8e8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 30px 20px;
+}
+
+/* حاوية الصفحة */
+.form-container {
+    width: 100%;
+    max-width: 550px;
+    background: linear-gradient(135deg, rgba(82, 12, 12, 0.85) 0%, rgba(46, 5, 5, 0.95) 100%);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 180, 180, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 30px;
+    font-size: 26px;
+    text-shadow: 0 2px 10px rgba(255, 180, 180, 0.2);
+    text-transform: capitalize;
+    background: none;
+    padding: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+label, .label {
+    color: #f7dede;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+input[type="text"], select {
+    width: 100%;
+    background: rgba(60, 10, 10, 0.8);
+    border: 2px solid rgba(255, 180, 180, 0.2);
+    height: 45px;
+    padding: 0 15px;
+    color: #fce8e8;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 10px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus, select:focus {
+    border-color: #ffb8b8;
+    box-shadow: 0 0 10px rgba(255, 180, 180, 0.2);
+}
+
+select option {
+    background: #4a0d0d;
+    color: #fce8e8;
+}
+
+/* تنسيق زر اختيار الملف */
+.file-group {
+    background: rgba(40, 5, 5, 0.4);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px dashed rgba(255, 180, 180, 0.3);
+    align-items: center;
+    text-align: center;
+}
+
+.custom-file-btn {
+    cursor: pointer;
+    background: rgba(90, 15, 15, 0.8);
+    color: #f7dede;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 180, 180, 0.2);
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.custom-file-btn:hover {
+    background-color: #a82020;
+    color: #ffffff;
+}
+
+/* أزرار الحفظ والرجوع */
+.submitBtn {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.btn {
+    cursor: pointer;
+    background: #a82020;
+    border: none;
+    height: 45px;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(168, 32, 32, 0.3);
+    width: 100%;
+}
+
+.btn:hover {
+    background-color: #c72828;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(199, 40, 40, 0.4);
+}
+
+.submitBtn a, .back-link {
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    background: rgba(60, 10, 10, 0.8);
+    color: #f7dede;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 180, 180, 0.15);
+    transition: all 0.3s ease;
+}
+
+.submitBtn a:hover, .back-link:hover {
+    background-color: #8c1515;
+    color: #ffffff;
+}
+
+/* التجاوب مع الشاشات الصغيرة */
+@media only screen and (max-width: 480px) {
+    .form-container {
+        padding: 25px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    input[type="text"], select, .btn {
+        height: 40px;
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/uploads/coursesCss.css">
+</head>
+<body>
+    <div class="container">
+        <div class="nav-links">
+            <a href="/uni-club">← Back</a>
+        </div>
+
+        <h1>List of Available Courses</h1>
+
+        <% if (courses && courses.length > 0) { %>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Academy Years</th>
+                            <th>Lang</th>
+                            <th>File</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% courses.forEach((course, index) => { %>
+                            <tr>
+                                <td><%= index + 1 %></td>
+                                <td><strong><%= course.title %></strong></td>
+                                <td><%= course.academy_years %></td>
+                                <td><%= course.language %></td>
+                                <td>
+                                    <a href="<%= course.file_path %>" class="btn-download" target="_blank">Show</a>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        <% } else { %>
+            <div class="no-data">
+                <p>No more course right now</p>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>

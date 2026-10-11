@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title || "Uni-Club" %></title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/uploads/uniClubStyle/uniClubCss.css">
+</head>
+<body>
+    <div class="container">
+        <!-- شريط التنقل العلوي -->
+        <header class="head">
+            <nav class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="/uni-club">Home</a></li>
+                    <li><a href="/materials">Materials</a></li>
+                    <li><a href="/courses">Courses</a></li>
+                    <li><a href="/chat">Chat</a></li>
+                    <li><a href="/contactMe">Contact</a></li>
+                </ul>
+                <div class="settings-wrapper">
+                    <img src="/uploads/setting.png" alt="Settings" class="settingBtn" id="settingToggle">
+                    <ul class="profile" id="profileDropdown">
+                        <li><a href="/profile/<%= user.userName %>">show account</a></li>
+                        <li><a href="/signout">sign out</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- محتوى الصفحة الرئيسي -->
+        <main class="body">
+            <div class="hero-card">
+                <div class="logo-badge">Uni-Club Platform</div>
+                <h1 class="hero-title"><span>Uni-club</span></h1>
+                <p class="hero-desc">
+                    It is a university platform dedicated to sharing courses and study materials to facilitate peer-to-peer student support and disseminate knowledge, guided by <span>Imam Ali</span>
+                </p>
+                <div class="quote-box">
+                    <p>'The zakat of knowledge is sharing it'</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+<!-- سكربت ضمان تفاعل القائمة المنسدلة -->
+    <script>
+        const settingBtn = document.querySelector('.settingBtn');
+        const profileMenu = document.querySelector('.profile');
+
+        if (settingBtn && profileMenu) {
+            settingBtn.addEventListener('click', function(event) {
+                event.stopPropagation();
+                profileMenu.classList.toggle('active');
+            });
+
+            document.addEventListener('click', function() {
+                profileMenu.classList.remove('active');
+            });
+        }
+    </script>
+    <script src="/uploads/uniClubStyle/uniClubJs.js"></script>
+</body>
+</html>

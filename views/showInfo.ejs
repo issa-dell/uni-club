@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/uploads/showInfoCss.css">
+</head>
+<body>
+    <div class="profile-container">
+        <h1>Welcome, <span><%= userName %></span></h1>
+
+        <div class="info-card">
+            <div class="info-row">
+                <span class="info-label">Username:</span>
+                <span class="info-value"><%= userName %></span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">User ID:</span>
+                <span class="info-value"><%= userId %></span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Role:</span>
+                <span class="info-value"><%= userRole %></span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Joined At:</span>
+                <span class="info-value"><%= accDate.toLocaleDateString('en-GB'); %></span>
+            </div>
+        </div>
+
+        <div class="back-link-wrapper">
+            <a href="/uni-club" class="back-btn">Go back</a>
+        </div>
+    </div>
+</body>
+</html>

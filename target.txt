@@ -1,0 +1,18 @@
+1.verify email syntax
+2.verfiy email valid
+3.add setting button 
+  i. add sing out button
+  ii .add show my profile button
+4.relation between the material and the user added
+5.relation between the material and the course
+
+
+
+
+
+#.review all  language rules and logic text in all website
+#.try the website with different email
+#.try the website to show all error for fixed
+#.transfer the database to cloud and the server for big server
+#.The site published...
+

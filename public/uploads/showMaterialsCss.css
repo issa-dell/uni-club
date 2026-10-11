@@ -1,0 +1,258 @@
+/* إعدادات عامة */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: #6b1414;
+    background-image: radial-gradient(circle at top, #821c1c 0%, #4a0d0d 100%);
+    padding: 30px 20px;
+    color: #fce8e8;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, rgba(82, 12, 12, 0.85) 0%, rgba(46, 5, 5, 0.95) 100%);
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 180, 180, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 25px;
+    font-size: 26px;
+    text-shadow: 0 2px 10px rgba(255, 180, 180, 0.2);
+    text-transform: capitalize;
+}
+
+.nav-links {
+    margin-bottom: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    background-color: rgba(90, 15, 15, 0.7);
+    color: #f7dede;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 180, 180, 0.15);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.nav-links a:hover {
+    background-color: #a82020;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* نموذج البحث والفلاتر */
+.searchForm {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    background: rgba(40, 5, 5, 0.4);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(255, 180, 180, 0.1);
+}
+
+.serachYear {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.serachYear label {
+    font-weight: 600;
+    color: #f7dede;
+    font-size: 15px;
+}
+
+select {
+    background: rgba(60, 10, 10, 0.9);
+    border: 2px solid rgba(255, 180, 180, 0.25);
+    height: 40px;
+    padding: 0 15px;
+    color: #fce8e8;
+    font-weight: 600;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+select option {
+    background: #4a0d0d;
+    color: #fce8e8;
+}
+
+.goBtn {
+    cursor: pointer;
+    background: #a82020;
+    border: none;
+    height: 40px;
+    padding: 0 20px;
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 8px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.goBtn:hover {
+    background: #c72828;
+    transform: translateY(-1px);
+}
+
+.showAllBtn {
+    color: #f7dede;
+    text-decoration: none;
+    background: rgba(90, 15, 15, 0.7);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 180, 180, 0.15);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.showAllBtn:hover {
+    background-color: #a82020;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* تنسيق الجدول والتجاوب */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 180, 180, 0.15);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap;
+}
+
+th, td {
+    padding: 14px 16px;
+    text-align: center;
+}
+
+th {
+    background-color: rgba(45, 5, 5, 0.95);
+    color: #ffb8b8;
+    font-weight: 700;
+    font-size: 15px;
+    border-bottom: 2px solid rgba(255, 180, 180, 0.2);
+}
+
+td {
+    border-bottom: 1px solid rgba(255, 180, 180, 0.08);
+    color: #fce8e8;
+    font-size: 14px;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover {
+    background-color: rgba(255, 180, 180, 0.04);
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+/* الأزرار داخل الجدول */
+.btn-download {
+    background-color: #a82020;
+    color: white;
+    padding: 6px 14px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: inline-block;
+}
+
+.btn-download:hover {
+    background-color: #c72828;
+    transform: translateY(-1px);
+}
+
+.btn-delete {
+    color: white;
+    cursor: pointer;
+    background-color: #5c1010;
+    border: 1px solid rgba(255, 180, 180, 0.2);
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-delete:hover {
+    background-color: #a82020;
+}
+
+.no-data {
+    text-align: center;
+    padding: 40px;
+    color: #f7dede;
+    font-size: 16px;
+}
+
+/* معالجة الشاشات الصغيرة بدقة */
+@media only screen and (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    body {
+        padding: 10px;
+    }
+
+    .searchForm {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .serachYear {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .showAllBtn {
+        text-align: center;
+    }
+
+    th, td {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+}
