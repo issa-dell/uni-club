@@ -1,45 +1,42 @@
 const db = require('../config/db');
 const path = require('path');
-const fs = require('fs');
+const { createClient } = require('@supabase/supabase-js');
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
 
 const getAllmaterials = async (req, res) => {
     try {
         const successMessage = req.query.success ? 'added succ' : null;
         const [rows] = await db.query('SELECT * FROM materials');
-        res.render('materials/index',{successMessage : successMessage});
+        res.render('materials/index', { successMessage: successMessage });
     } catch (err) {
         console.error(err);
         res.status(500).send('Error fetching materials from database');
     }
 };
 
-const showAllMaterials =  async (req,res)=>{
-    try{
-        const [lows] = await db.execute('SELECT userRole FROM users WHERE userName =?',[req.session.user.userName]);
-        const userRole =lows[0].userRole 
-        const userSession =req.session.user.userName
-        const academyYears = req.query.academyYears
-        if(academyYears){
-            const [rows] = await db.query('SELECT materials.*, users.userName FROM materials JOIN users ON materials.user_id = users.id WHERE 	academy_years = ?',[academyYears]);
-            return res.render('showMaterials', {
-            materials: rows,
-            userSession: userSession,
-            userRole: userRole
+const showAllMaterials = async (req, res) => {
+    try {
+        const [lows] = await db.execute('SELECT userRole FROM users WHERE userName = ?', [req.session.user.userName]);
+        const userRole = lows[0].userRole;
+        const userSession = req.session.user.userName;
+        const academyYears = req.query.academyYears;
 
-        })
-        }else{
-            console.log('false')
+        if (academyYears) {
+            const [rows] = await db.query('SELECT materials.*, users.userName FROM materials JOIN users ON materials.user_id = users.id WHERE academy_years = ?', [academyYears]);
+            return res.render('showMaterials', {
+                materials: rows,
+                userSession: userSession,
+                userRole: userRole
+            });
         }
-        
+
         const [rows] = await db.query('SELECT materials.*, users.userName FROM materials JOIN users ON materials.user_id = users.id');
- 
         res.render('showMaterials', {
             materials: rows,
             userSession: userSession,
             userRole: userRole
-
-        })
-    }catch (err){
+        });
+    } catch (err) {
         console.error(err);
         res.status(500).send('Error fetching materials from database');
     }
@@ -52,17 +49,35 @@ const renderNewmaterialForm = (req, res) => {
 const creatematerial = async (req, res) => {
     try {
         const { title, academy_years, language, materialCourse } = req.body;
-        if(!req.file){
-            res.status(400).send("Error:Please upload a file for the material")
+        
+        if (!req.file) {
+            return res.status(400).send("Error: Please upload a file for the material");
         }
-        const file_path =`/uploads/${req.file.filename}`;
+
         const fileExtension = path.extname(req.file.originalname).toLowerCase(); 
         if (fileExtension !== '.pdf') {
             return res.status(400).send("Error: Please upload a PDF for the material");
         }
+
+        const fileName = `${Date.now()}-${file.originalname}`;
+        const { error: uploadError } = await supabase.storage
+            .from('materials')
+            .upload(fileName, req.file.buffer, {
+                contentType: req.file.mimetype,
+                upsert: false
+            });
+
+        if (uploadError) throw uploadError;
+
+        const { data: publicUrlData } = supabase.storage
+            .from('materials')
+            .getPublicUrl(fileName);
+
+        const filePublicUrl = publicUrlData.publicUrl;
+
         await db.query(
             'INSERT INTO materials (title, file_path, language, academy_years, course_id, user_id) VALUES (?, ?, ?, ?, ?, ?)',
-            [title, file_path, language, academy_years,materialCourse,req.session.user.id]
+            [title, filePublicUrl, language, academy_years, materialCourse, req.session.user.id]
         );
 
         res.redirect('/materials?success=true');
@@ -72,27 +87,32 @@ const creatematerial = async (req, res) => {
     }
 };
 
-
-
 const deletematerial = async (req, res) => {
     try {
         const materialId = req.params.id;
 
-        const [rows] = await db.execute('SELECT materials.*, users.userName FROM materials JOIN users ON materials.user_id = users.id WHERE materials.id = ?',[materialId]);
-        const [lows] = await db.execute('SELECT userRole FROM users WHERE userName =?',[req.session.user.userName]);
-        const userRole =lows[0].userRole        
+        const [rows] = await db.execute('SELECT materials.*, users.userName FROM materials JOIN users ON materials.user_id = users.id WHERE materials.id = ?', [materialId]);
+        const [lows] = await db.execute('SELECT userRole FROM users WHERE userName = ?', [req.session.user.userName]);
+        const userRole = lows[0].userRole;          
+
         if (rows.length > 0) {
             const material = rows[0];
 
-            if(material.userName !=req.session.user.userName &&userRole !="admin"){
-                return res.status(403).send("You do not have permission deleted this materilas")
-            }
-            const filePath = path.join(__dirname, '../public', material.file_path);
-            
-            if (fs.existsSync(filePath)) {
-                fs.unlinkSync(filePath); 
+            if (material.userName != req.session.user.userName && userRole != "admin") {
+                return res.status(403).send("You do not have permission to delete this material");
             }
 
+            try {
+                const fileUrl = material.file_path;
+                const fileName = fileUrl.split('/').pop();
+                if (fileName) {
+                    await supabase.storage.from('materials').remove([fileName]);
+                }
+            } catch (storageErr) {
+                console.error("Error deleting file from Supabase storage:", storageErr);
+            }
+
+            // حذف السجل من قاعدة البيانات
             await db.execute('DELETE FROM materials WHERE id = ?', [materialId]);
         }
 
@@ -104,17 +124,10 @@ const deletematerial = async (req, res) => {
     }
 };
 
-
-
-
-
-
-
 module.exports = {
     getAllmaterials,
     renderNewmaterialForm,
     creatematerial,
     deletematerial,
     showAllMaterials,
-
 };
