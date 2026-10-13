@@ -43,23 +43,6 @@
             </div>
         </main>
     </div>
-
-<!-- سكربت ضمان تفاعل القائمة المنسدلة -->
-    <script>
-        const settingBtn = document.querySelector('.settingBtn');
-        const profileMenu = document.querySelector('.profile');
-
-        if (settingBtn && profileMenu) {
-            settingBtn.addEventListener('click', function(event) {
-                event.stopPropagation();
-                profileMenu.classList.toggle('active');
-            });
-
-            document.addEventListener('click', function() {
-                profileMenu.classList.remove('active');
-            });
-        }
-    </script>
     <script src="/uploads/uniClubStyle/uniClubJs.js"></script>
 </body>
 </html>
