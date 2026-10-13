@@ -1,5 +1,5 @@
-const profileImage = document.querySelector('.head img');
-const profileMenu = document.querySelector('.profile');
+const settingBtn = document.querySelector('#settingToggle');
+const profileMenu = document.querySelector('#profileDropdown');
 
 
 if (profileImage && profileMenu) {
