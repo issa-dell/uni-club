@@ -103,7 +103,7 @@ body {
 }
 
 .profile.active {
-    display: flexp;
+    display: flex;
 }
 
 .profile li {
