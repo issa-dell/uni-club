@@ -42,7 +42,7 @@ app.use('/courses', coursesRoutes);
 app.use('/auth', authRoutes);
 app.use('/signout', signOutRoutes);
 app.use('/profile', showAccRoutes);
-app.use('/', uniClubRoutes);
+app.use('/uni-club', uniClubRoutes);
 
 
 
