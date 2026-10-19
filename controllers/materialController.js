@@ -59,7 +59,7 @@ const creatematerial = async (req, res) => {
             return res.status(400).send("Error: Please upload a PDF for the material");
         }
 
-        const fileName = `${Date.now()}-${file.originalname}`;
+        const fileName = `${Date.now()}-${req.file.originalname}`;
         const { error: uploadError } = await supabase.storage
             .from('materials')
             .upload(fileName, req.file.buffer, {
