@@ -91,39 +91,64 @@ const deletematerial = async (req, res) => {
     try {
         const materialId = req.params.id;
 
-        const [rows] = await db.execute('SELECT materials.*, users.userName FROM materials JOIN users ON materials.user_id = users.id WHERE materials.id = ?', [materialId]);
+        const [rows] = await db.execute(
+            'SELECT materials.*, users.userName FROM materials JOIN users ON materials.user_id = users.id WHERE materials.id = ?', 
+            [materialId]
+        );
+        
+        if (rows.length === 0) {
+            return res.status(404).send("Material not found");
+        }
+
+        const material = rows[0]; // تعريف متغير material هنا بوضوح
+
         const [lows] = await db.execute('SELECT userRole FROM users WHERE userName = ?', [req.session.user.userName]);
+        if (lows.length === 0) {
+            return res.status(403).send("Unauthorized user");
+        }
         const userRole = lows[0].userRole;          
 
-        if (rows.length > 0) {
-            const material = rows[0];
-
-            if (material.userName != req.session.user.userName && userRole != "admin") {
-                return res.status(403).send("You do not have permission to delete this material");
-            }
-
-            try {
-                const fileUrl = material.file_path;
-                const fileName = fileUrl.split('/').pop();
-                if (fileName) {
-                    await supabase.storage.from('materials').remove([fileName]);
-                }
-            } catch (storageErr) {
-                console.error("Error deleting file from Supabase storage:", storageErr);
-            }
-
-            // حذف السجل من قاعدة البيانات
-            await db.execute('DELETE FROM materials WHERE id = ?', [materialId]);
+        if (material.userName !== req.session.user.userName && userRole !== "admin") {
+            return res.status(403).send("You do not have permission to delete this material");
         }
+
+        try {
+            const filePath = material.file_path || material.file_url; 
+            
+            if (filePath) {
+                let fileName = filePath;
+                if (filePath.includes('/materials/')) {
+                    fileName = filePath.split('/materials/').pop();
+                } else {
+                    fileName = filePath.split('/').pop();
+                }
+
+                fileName = decodeURIComponent(fileName);
+                console.log("Attempting to delete file from Supabase exact name:", fileName);
+
+                const { error: storageErr } = await supabase.storage
+                    .from('materials')
+                    .remove([fileName]);
+
+                if (storageErr) {
+                    console.error("Error deleting file from Supabase storage:", storageErr);
+                } else {
+                    console.log("File deleted successfully from Supabase storage");
+                }
+            }
+        } catch (storageErr) {
+            console.error("Exception during Supabase file deletion:", storageErr);
+        }
+
+        await db.execute('DELETE FROM materials WHERE id = ?', [materialId]);
 
         res.redirect('/materials/list');
 
     } catch (err) {
-        console.error(err);
+        console.error("Server Error during deletion:", err);
         res.status(500).send('Server Error during deletion');
     }
 };
-
 module.exports = {
     getAllmaterials,
     renderNewmaterialForm,
