@@ -2,6 +2,7 @@ const db = require('../config/db');
 const path = require('path');
 const { createClient } = require('@supabase/supabase-js');
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
+const fs = require('fs'); 
 
 const getAllmaterials = async (req, res) => {
     try {
@@ -56,16 +57,25 @@ const creatematerial = async (req, res) => {
 
         const fileExtension = path.extname(req.file.originalname).toLowerCase(); 
         if (fileExtension !== '.pdf') {
+            // حذف الملف المؤقت إذا لم يكن PDF
+            fs.unlinkSync(req.file.path);
             return res.status(400).send("Error: Please upload a PDF for the material");
         }
 
         const fileName = `${Date.now()}-${req.file.originalname}`;
+        
+        // قراءة الملف من المجلد المحلي المؤقت الذي خزنه فيه Multer
+        const fileBuffer = fs.readFileSync(req.file.path);
+
         const { error: uploadError } = await supabase.storage
             .from('materials')
-            .upload(fileName, req.file.buffer, {
+            .upload(fileName, fileBuffer, {
                 contentType: req.file.mimetype,
                 upsert: false
             });
+
+        // حذف الملف من المجلد المؤقت المحلي بعد إرساله لـ Supabase لتوفير المساحة
+        fs.unlinkSync(req.file.path);
 
         if (uploadError) throw uploadError;
 
@@ -82,6 +92,9 @@ const creatematerial = async (req, res) => {
 
         res.redirect('/materials?success=true');
     } catch (err) {
+        if (req.file && fs.existsSync(req.file.path)) {
+            fs.unlinkSync(req.file.path);
+        }
         console.error(err);
         res.status(500).send('Error creating new material');
     }
