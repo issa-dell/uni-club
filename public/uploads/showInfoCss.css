@@ -42,7 +42,6 @@ h1 span {
     border-radius: 0;
 }
 
-/* بطاقة المعلومات */
 .info-card {
     background: rgba(40, 5, 5, 0.5);
     border-radius: 12px;
@@ -78,7 +77,6 @@ h1 span {
     border: 1px solid rgba(255, 180, 180, 0.15);
 }
 
-/* زر الرجوع */
 .back-link-wrapper {
     text-align: center;
 }
@@ -104,7 +102,6 @@ h1 span {
     box-shadow: 0 6px 15px rgba(199, 40, 40, 0.4);
 }
 
-/* التجاوب مع الشاشات الصغيرة */
 @media only screen and (max-width: 480px) {
     .profile-container {
         padding: 20px;
