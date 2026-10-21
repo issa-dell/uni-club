@@ -1,4 +1,3 @@
-/* إعدادات عامة */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -57,7 +56,6 @@ h1 {
     transform: translateY(-2px);
 }
 
-/* نموذج البحث والفلاتر */
 .searchForm {
     display: flex;
     align-items: center;
@@ -138,7 +136,6 @@ select option {
     transform: translateY(-2px);
 }
 
-/* تنسيق الجدول والتجاوب */
 .table-responsive {
     width: 100%;
     overflow-x: auto;
@@ -186,7 +183,6 @@ tr:hover {
     gap: 8px;
 }
 
-/* الأزرار داخل الجدول */
 .btn-download {
     background-color: #a82020;
     color: white;
@@ -227,7 +223,6 @@ tr:hover {
     font-size: 16px;
 }
 
-/* معالجة الشاشات الصغيرة بدقة */
 @media only screen and (max-width: 768px) {
     .container {
         padding: 15px;
