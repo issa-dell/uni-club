@@ -126,7 +126,7 @@ const deletematerial = async (req, res) => {
                     fileName = filePath.split('/materials/').pop();
                 } else {
                     fileName = filePath.split('/').pop();
-                
+                }
 
                 fileName = decodeURIComponent(fileName); //URL decoding to get the real name before uploading this file
 
