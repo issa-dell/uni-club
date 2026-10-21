@@ -9,7 +9,7 @@ const sayHelloFromCourses = async(req,res)=>{
 
 
 
-const getAllCourses = async(req,res) =>{
+const getAllCourses = async(req,res) =>{ // get courses function
     try{
         const [rows] = await db.query('SELECT * FROM courses')
         res.render('courses',{courses: rows})
